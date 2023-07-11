@@ -1,0 +1,75 @@
+---
+title: "Lista 5"
+author: "Malcolm dos Reis"
+date: "2023-04-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(include = FALSE)
+```
+
+## Exercícios
+
+Observando o banco de dados cars, podemos ver que este é composto por 50 observações e 2 variáveis, sendo estas a valocidade (speed) e a distância (dist).
+
+```{r cars, include=TRUE}
+data('cars')
+str(cars)
+```
+
+E aqui estão as primeiras seis observações:
+
+```{r primeiras_linhas, include=TRUE}
+head(cars, 6)
+```
+
+Aqui estão essas mesmas informações usando a ferramenta kable() do pacote knitr:
+
+```{r usando_kable, echo=TRUE, include=TRUE}
+kable(head(cars, 6))
+```
+
+A visualização dos dados, dessa forma, ficou muito melhor.
+Aqui está um resumo desse banco de dados:
+```{r sumario_cars, include=TRUE}
+kable(summary(cars))
+```
+
+Vamos agora fazer um gráfico de dispersão usando o plot():
+
+```{r grafico, echo=TRUE, include=TRUE, fig.height=5, fig.width=5, fig.align='center', fig.cap="O primeiro gráfico feito em um documento Rmd"}
+plot(cars$dist, y = cars$speed, xlab = 'Distância', ylab = "Velocidade")
+
+```
+
+Agora vamos criar uma nova base de dados assim como pede o execício.
+
+```{r novos_dados, echo=TRUE, include=TRUE}
+novas_medidas <- data.frame(speed2 = (cars$speed)**2, 
+                            log.dist = log(cars$dist), 
+                            sqrt.dist = sqrt(cars$dist))
+kable(head(novas_medidas, 6))
+```
+
+Voltando à antiga base de dados, vamos encontrar a média e o desvio padrão da velocidade usando alguma função da família apply:
+
+```{r medidas, echo=TRUE, include=TRUE}
+media <- apply(cars, 2, mean)[1]
+desvio_padrao <- apply(cars, 2, sd)[1]
+medidas <- data.frame(media, desvio_padrao)
+kable(medidas)
+```
+
+
+
+
+
+
+
+
+
+
+
